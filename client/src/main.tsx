@@ -4,7 +4,6 @@ import App from "./App.tsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Homepage from "./pages/Homepage.tsx";
 import Login from "./pages/Login.tsx";
 import Register from "./pages/Register.tsx";
 
