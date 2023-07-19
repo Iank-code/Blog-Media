@@ -6,8 +6,8 @@ import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
-import Login from "./pages/Login.tsx";
-import Register from "./pages/Register.tsx";
+import Login from "./pages/auth/Login.tsx";
+import Register from "./pages/auth/Register.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

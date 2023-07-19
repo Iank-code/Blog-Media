@@ -1,4 +1,5 @@
-import "../output.css";
+import "../../output.css";
+import { NavLink } from "react-router-dom";
 
 import {
   TextInput,
@@ -26,14 +27,14 @@ export default function Register() {
         Welcome back!
       </Title>
       <Text color="dimmed" size="sm" align="center" mt={5}>
-        Do not have an account yet?{" "}
+        Already have an account?{" "}
         <Anchor size="sm" component="button">
-          Create account
+          <NavLink to="/login">Login</NavLink>
         </Anchor>
       </Text>
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-        <TextInput label="Email" placeholder="you@mantine.dev" required />
+        <TextInput label="Full Name" placeholder="your name" required />
         <TextInput label="Email" placeholder="you@mantine.dev" required />
         <PasswordInput
           label="Password"
@@ -44,12 +45,12 @@ export default function Register() {
 
         <PasswordInput
           label="Password"
-          placeholder="Your password"
+          placeholder="Confirm Your password"
           required
           mt="md"
         />
         <Group position="apart" mt="lg">
-          {/* <Checkbox label="Remember me" /> */}
+          <Checkbox label="Remember me" />
           <Anchor component="button" size="sm">
             Forgot password?
           </Anchor>
