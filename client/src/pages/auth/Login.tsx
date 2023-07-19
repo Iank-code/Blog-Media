@@ -17,7 +17,7 @@ import {
   Group,
   Button,
 } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
+// import { notifications } from "@mantine/notifications";
 
 export default function Login() {
   const form = useForm<LoginInput>({
