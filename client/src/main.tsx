@@ -11,7 +11,7 @@ import Register from "./pages/Register.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Homepage />,
+    element: <App />,
   },
   {
     path: "/login",
