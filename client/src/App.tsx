@@ -1,9 +1,9 @@
-import "../dist/output.css"
+import "./output.css";
 
 function App() {
   return (
     <>
-      <div className="text-rose-600 w-screen h-screen bg-red-300">Homepage</div>
+      <div className="text-rose-600 h-screen w-screen bg-red-300">Homepage</div>
     </>
   );
 }
