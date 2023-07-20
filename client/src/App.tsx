@@ -1,10 +1,26 @@
+import Navbar from "./components/Navbar";
 import "./output.css";
 import Homepage from "./pages/Homepage";
+import { HeaderSearchProps } from "./utils/interface/navbar.interface";
 
 function App() {
+  
+  const headerLinks: HeaderSearchProps["links"] = [
+    {
+      link: "/login",
+      label: "Login",
+    },
+    {
+      link: "/register",
+      label: "Register",
+    },
+    // Add more link groups as needed
+  ];
+
   return (
     <>
-      <div className="text-rose-600 h-screen w-screen bg-red-300">
+      <div className="h-screen w-screen">
+        <Navbar links={headerLinks} />
         <Homepage />
       </div>
     </>
