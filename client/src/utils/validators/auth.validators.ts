@@ -1,8 +1,19 @@
 import * as yup from "yup";
 
 export const loginValidator = yup.object({
-  email: yup.string().required(),
-  password: yup.string().required(),
+  email: yup
+    .string()
+    .matches(
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+      "Invalid Email Address!"
+    )
+    .required(),
+  zipcode: yup
+    .string()
+    .matches(/^[0-9]+$/, "Must be only digits")
+    .min(4, "Must be more than 4 digits")
+    .required()
+    .typeError("Zipcode should be a number and minimum value must be 4 digits"),
 });
 
 export type LoginInput = yup.InferType<typeof loginValidator>;

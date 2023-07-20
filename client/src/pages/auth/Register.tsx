@@ -55,9 +55,13 @@ export default function Register() {
             Forgot password?
           </Anchor>
         </Group>
-        <Button fullWidth mt="xl">
+        <button
+          className="bg-blue-500 text-white py-1 w-full rounded mt-4"
+          type="submit"
+          // onClick={submitForm}
+        >
           Create
-        </Button>
+        </button>
       </Paper>
     </Container>
   );

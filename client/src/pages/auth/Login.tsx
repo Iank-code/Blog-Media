@@ -7,7 +7,6 @@ import {
 } from "../../utils/validators/auth.validators";
 import {
   TextInput,
-  PasswordInput,
   Checkbox,
   Anchor,
   Paper,
@@ -15,15 +14,16 @@ import {
   Text,
   Container,
   Group,
-  Button,
+  // Button,
 } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 // import { notifications } from "@mantine/notifications";
 
 export default function Login() {
   const form = useForm<LoginInput>({
     initialValues: {
       email: "",
-      password: "",
+      zipcode: "",
     },
 
     validate: yupResolver(loginValidator),
@@ -33,11 +33,22 @@ export default function Login() {
     const formItem = new FormData();
 
     formItem.append("email", form.values.email);
-    formItem.append("password", form.values.password);
+    formItem.append("zipcode", form.values.zipcode);
 
+    if (form.validate().hasErrors === true) {
+      for (const [key, value] of Object.entries(form.validate().errors)) {
+        notifications.show({
+          title: "Failed",
+          message: `${value}🤥`,
+          color: "red",
+          autoClose: 2000,
+          // icon: <IconX />,
+        });
+      }
+    }
     console.log({
       email: form.values.email,
-      password: form.values.password,
+      zipcode: form.values.zipcode,
     });
     // fetch("http://localhost:3000/user/login", {
     //   method: "POST",
@@ -98,18 +109,21 @@ export default function Login() {
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
         <form onSubmit={form.onSubmit((values) => values)}>
+          {/* <Zip
+            onValue={(value: any) => console.log(`validated zip code: ${value}`)}
+          /> */}
           <TextInput
             label="Email"
             placeholder="you@mantine.dev"
             required
             {...form.getInputProps("email")}
           />
-          <PasswordInput
-            label="Password"
-            placeholder="Your password"
+          <TextInput
+            label="Zip Code"
+            placeholder="Your Zip Code"
             required
             mt="md"
-            {...form.getInputProps("password")}
+            {...form.getInputProps("zipcode")}
           />
           <Group position="apart" mt="lg">
             <Checkbox label="Remember me" />
@@ -117,11 +131,15 @@ export default function Login() {
               Forgot password?
             </Anchor>
           </Group>
-          <Button fullWidth mt="xl">
-            <button type="submit" onClick={submitForm}>
-              Sign in
-            </button>
-          </Button>
+          {/* <Button fullWidth mt="xl"> */}
+          <button
+            className="bg-blue-500 text-white py-1 w-full rounded mt-4"
+            type="submit"
+            onClick={submitForm}
+          >
+            Sign in
+          </button>
+          {/* </Button> */}
         </form>
       </Paper>
     </Container>

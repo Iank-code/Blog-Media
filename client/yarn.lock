@@ -2162,6 +2162,13 @@ react-transition-group@4.4.2:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
+react-zipcode@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-zipcode/-/react-zipcode-1.0.1.tgz#d1b9cf69b4db6daa12e9156ef4e982bf66b60606"
+  integrity sha512-giSzsh0r0Aj43upjMBOr1JlCChxAKUIEoxMwNEgVeUm9pAiicuOzdRBS6aTBywevPgOCyCHgsmFKWvUJ9ZlVow==
+  dependencies:
+    zippo "~1.0.1"
+
 react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
@@ -2577,3 +2584,8 @@ yup@^1.2.0:
     tiny-case "^1.0.3"
     toposort "^2.0.2"
     type-fest "^2.19.0"
+
+zippo@~1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/zippo/-/zippo-1.0.1.tgz#b9fe75f3b5661ffff8e2ed03f06ced8bba1ffe74"
+  integrity sha512-x922p1JWv5n2PH0/7GAHxruX18d73Z3ka5mh6S4Vf8AKcApPqIExt90G1RLzcnrpQm47KcO+9CkObyLGWMaaFQ==
