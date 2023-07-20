@@ -1,4 +1,5 @@
 import "../../output.css";
+import { IconX } from "@tabler/icons-react";
 import { NavLink } from "react-router-dom";
 import { useForm, yupResolver } from "@mantine/form";
 import {
@@ -17,7 +18,6 @@ import {
   // Button,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-// import { notifications } from "@mantine/notifications";
 
 export default function Login() {
   const form = useForm<LoginInput>({
@@ -38,11 +38,11 @@ export default function Login() {
     if (form.validate().hasErrors === true) {
       for (const [key, value] of Object.entries(form.validate().errors)) {
         notifications.show({
-          title: "Failed",
+          title: `Invalid ${key}`,
           message: `${value}🤥`,
           color: "red",
           autoClose: 2000,
-          // icon: <IconX />,
+          icon: <IconX />,
         });
       }
     }
@@ -109,9 +109,6 @@ export default function Login() {
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
         <form onSubmit={form.onSubmit((values) => values)}>
-          {/* <Zip
-            onValue={(value: any) => console.log(`validated zip code: ${value}`)}
-          /> */}
           <TextInput
             label="Email"
             placeholder="you@mantine.dev"
@@ -131,7 +128,6 @@ export default function Login() {
               Forgot password?
             </Anchor>
           </Group>
-          {/* <Button fullWidth mt="xl"> */}
           <button
             className="bg-blue-500 text-white py-1 w-full rounded mt-4"
             type="submit"
@@ -139,7 +135,6 @@ export default function Login() {
           >
             Sign in
           </button>
-          {/* </Button> */}
         </form>
       </Paper>
     </Container>

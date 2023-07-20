@@ -10,31 +10,44 @@ export const loginValidator = yup.object({
     .required(),
   zipcode: yup
     .string()
-    .matches(/^[0-9]+$/, "Must be only digits")
-    .min(4, "Must be more than 4 digits")
-    .required()
-    .typeError("Zipcode should be a number and minimum value must be 4 digits"),
+    .matches(/^[0-9]+$/, "should be only digits")
+    .min(4, "should be more than 4 digits")
+    .required(),
 });
 
 export type LoginInput = yup.InferType<typeof loginValidator>;
 
 export const signupValidator = yup.object({
-  name: yup
+  username: yup
     .string()
-    .min(4, "Name must be at least 4 characters")
-    .max(50, "Name must be less than 50 characters")
+    .min(4, "Username should be at least 4 characters")
+    .max(50, "Username should not exceed 50 characters")
     .required(),
-  email: yup.string().email().required(),
-  password: yup.string().min(4).required(),
+
+  email: yup
+    .string()
+    .matches(
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+      "Invalid Email Address!"
+    )
+    .required(),
+  zipcode: yup
+    .string()
+    .matches(/^[0-9]+$/, "should be only digits")
+    .min(4, "should be more than 4 digits")
+    .required(),
+  password: yup
+    .string()
+    .min(6, "Password should be atleast 6 characters")
+    .required(),
   password_confirmation: yup
     .string()
-    .min(6, "Password confirmation must be at least 4 characters")
+    .min(6, "Password confirmation should be at least 4 characters")
     .required("Password confirmation is required")
     .oneOf([
       yup.ref("password"),
       "Password confirmation does not match with your password",
     ]),
-  // file: yup.mixed().required("File is required")
 });
 
 export type SignupInput = yup.InferType<typeof signupValidator>;
