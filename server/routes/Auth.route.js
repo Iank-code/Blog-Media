@@ -2,6 +2,10 @@ const router = require("express").Router();
 const User = require("../models/User.model");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
+const axios = require("axios");
+const redis = require("redis");
+const dotenv = require("dotenv");
+dotenv.config();
 
 // Register route
 router.post("/register", async (req, res) => {
@@ -26,6 +30,11 @@ router.post("/register", async (req, res) => {
 // Login route
 router.post("/login", async (req, res) => {
   try {
+    // configuring redis
+    const client = redis.createClient(process.env.REDIS_PORT);
+    await client.connect();
+    // await client.set(process.env.REDIS_PORT);
+
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
@@ -42,14 +51,34 @@ router.post("/login", async (req, res) => {
       {
         id: user.id,
         email: user.email,
+        zipcode: user.zipcode,
       },
       process.env.JWT_SEC,
-      { expiresIn: "3d" }
+      { expiresIn: "1d" }
     );
 
     const { password, ...others } = user.toObject();
 
-    return res.status(200).json({ ...others, accessToken });
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts",
+    );
+
+    // Assuming the API returns an array of posts, you can access them here
+    const posts = response.data;
+    // client.set("json_placeholder_data", JSON.stringify(posts));
+    client.set("json_placeholder_data", JSON.stringify(posts), (err, reply) => {
+      if (err) {
+        console.error("Error setting data:", err);
+      } else {
+        console.log("Data set successfully:", reply);
+      }
+    });
+
+    // Get a value
+
+    let clientData = await client.get("json_placeholder_data");
+    let data = JSON.parse(clientData);
+    return res.status(200).json({ ...others, accessToken, data });
   } catch (err) {
     res.status(500).json(err);
   }
