@@ -20,6 +20,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    subscriptionType: {
+      type: String,
+      required: false,
+      default: "FREE_USER",
+    },
   },
   { timestamps: true }
 );
