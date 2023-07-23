@@ -23,7 +23,7 @@ import { HeaderSearchProps } from "../../utils/interface/app.interface";
 import axios from "axios";
 
 export default function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const form = useForm<LoginInput>({
     initialValues: {
       email: "",
@@ -53,8 +53,8 @@ export default function Login() {
 
     axios({
       method: "post",
-      url: "http://localhost:3000/api/auth/login",
-      // url: `{process.env.SERVER_URL}/auth/login`,
+      // url: "http://localhost:3000/api/auth/login",
+      url: "https://blog-media-backend.onrender.com/api/auth/login",
       data: {
         email: form.values.email,
         zipcode: form.values.zipcode,
@@ -62,9 +62,9 @@ export default function Login() {
     })
       .then((res: any) => {
         if (res.status === 200) {
-          console.log(res.data)
+          console.log(res.data);
           localStorage.setItem("uid", res.data._id);
-          localStorage.setItem("accessToken", res.data.accessToken)
+          localStorage.setItem("accessToken", res.data.accessToken);
           localStorage.setItem("username", res.data.username);
           notifications.show({
             title: `Login Successfull`,
@@ -75,13 +75,13 @@ export default function Login() {
           });
 
           const accessToken = localStorage.getItem("accessToken");
-          if(accessToken){
-            navigate("/landing")
+          if (accessToken) {
+            navigate("/landing");
           }
         }
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error);
         notifications.show({
           title: `Invalid Username or email address`,
           message: `Check if you entered the correct information🤥`,

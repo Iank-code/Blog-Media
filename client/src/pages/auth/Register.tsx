@@ -68,7 +68,8 @@ export default function Register() {
     // Submitting the form to the server
     axios({
       method: "post",
-      url: "http://localhost:3000/api/auth/register",
+      url: "https://blog-media-backend.onrender.com/api/auth/register",
+      // url: "http://localhost:3000/api/auth/register",
       data: {
         username: form.values.username,
         email: form.values.email,
