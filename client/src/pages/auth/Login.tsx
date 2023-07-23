@@ -1,5 +1,5 @@
 import "../../output.css";
-import { IconX } from "@tabler/icons-react";
+import { IconCheck, IconX } from "@tabler/icons-react";
 import { NavLink } from "react-router-dom";
 import { useForm, yupResolver } from "@mantine/form";
 import {
@@ -20,6 +20,7 @@ import {
 import { notifications } from "@mantine/notifications";
 import Navbar from "../../components/Navbar";
 import { HeaderSearchProps } from "../../utils/interface/app.interface";
+import axios from "axios";
 
 export default function Login() {
   const form = useForm<LoginInput>({
@@ -48,48 +49,36 @@ export default function Login() {
         });
       }
     }
-    console.log({
-      email: form.values.email,
-      zipcode: form.values.zipcode,
-    });
-    // fetch("http://localhost:3000/user/login", {
-    //   method: "POST",
-    //   body: formItem,
-    // })
-    //   .then((res) => {
-    //     if (!res.ok) {
-    //       notifications.show({
-    //         title: "Failed",
-    //         message: "Seems there is something wrong 🤥",
-    //         color: "red",
-    //         autoClose: 1800,
-    //         icon: <IconX />,
-    //       });
-    //       throw new Error("Can't perform request");
-    //     }
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     if (data.data.token) {
-    //       notifications.show({
-    //         title: data.message,
-    //         message: "Hey there, your code is awesome! 🤥",
-    //         color: "green",
-    //         autoClose: 1800,
-    //         icon: <IconCheck />,
-    //       });
-    //       navigate("/home");
-    //     }
-    //     localStorage.setItem("id", data.data.data.id);
-    //     localStorage.setItem("token", data.data.token);
-    //     localStorage.setItem("name", data.data.data.name);
-    //     localStorage.setItem("isAdmin", data.data.data.IsAdmin);
-    //     localStorage.setItem("email", data.data.data.email);
-    //     localStorage.setItem("image", data.data.image);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+
+    axios({
+      method: "post",
+      url: "http://localhost:3000/api/auth/login",
+      data: {
+        email: form.values.email,
+        zipcode: form.values.zipcode,
+      },
+    })
+    .then((res: any) => {
+        if (res.status === 200) {
+          notifications.show({
+            title: `Login Successfull`,
+            message: `Welcome back`,
+            color: "green",
+            autoClose: 2000,
+            icon: <IconCheck />,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        notifications.show({
+          title: `Invalid Username or email address`,
+          message: `Check if you entered the correct information🤥`,
+          color: "red",
+          autoClose: 2000,
+          icon: <IconX />,
+        });
+      });
   };
 
   // Interface for Navbar
