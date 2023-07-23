@@ -1,6 +1,7 @@
 import { createStyles, Header, Container, Group, rem } from "@mantine/core";
 import { MantineLogo } from "@mantine/ds";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -55,6 +56,7 @@ interface HeaderSimpleProps {
 }
 
 export default function Navbar({ links }: HeaderSimpleProps) {
+  const navigate = useNavigate();
   const accessToken = localStorage.getItem("accessToken");
   // const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
@@ -72,9 +74,15 @@ export default function Navbar({ links }: HeaderSimpleProps) {
         <Group spacing={40} className={classes.links}>
           {items}
           {accessToken && (
-            <button onClick={() => {localStorage.clear()
-            
-            window.location.reload()}}>Log Out</button>
+            <button
+              onClick={() => {
+                localStorage.clear();
+
+                navigate("/login");
+              }}
+            >
+              Log Out
+            </button>
           )}
         </Group>
       </Container>
