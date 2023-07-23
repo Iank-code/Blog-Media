@@ -1,6 +1,7 @@
 import "../../output.css";
-// import axios from "axios";
-import { IconX } from "@tabler/icons-react";
+import { useState } from "react";
+import axios from "axios";
+import { IconCheck, IconX } from "@tabler/icons-react";
 import { NavLink } from "react-router-dom";
 
 import {
@@ -24,6 +25,7 @@ import { HeaderSearchProps } from "../../utils/interface/app.interface";
 import Navbar from "../../components/Navbar";
 
 export default function Register() {
+  const [data, setData] = useState<any>();
   const headerLinks: HeaderSearchProps["links"] = [
     {
       link: "/",
@@ -54,14 +56,6 @@ export default function Register() {
 
   // Function for submitting the form
   const submitForm = () => {
-    const formItem = new FormData();
-
-    formItem.append("username", form.values.username);
-    formItem.append("email", form.values.email);
-    formItem.append("zipcode", form.values.zipcode);
-    formItem.append("password", form.values.password);
-    formItem.append("password_confirmation", form.values.password_confirmation);
-
     if (form.validate().hasErrors === true) {
       for (const [key, value] of Object.entries(form.validate().errors)) {
         notifications.show({
@@ -73,7 +67,42 @@ export default function Register() {
         });
       }
     }
-    // axios.post()
+    // Submitting the form to the server
+    axios({
+      method: "post",
+      url: "http://localhost:3000/api/auth/register",
+      data: {
+        username: form.values.username,
+        email: form.values.email,
+        zipcode: form.values.zipcode,
+        password: form.values.password,
+      },
+      // data: formItem,
+    })
+      .then((res) => {
+        console.log(res.data);
+        console.log(res.status);
+        if (res.status === 201) {
+          notifications.show({
+            title: `Account created successfully`,
+            message: `Log in to continue`,
+            color: "green",
+            autoClose: 2000,
+            icon: <IconCheck />,
+          });
+        }
+        setData(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        notifications.show({
+          title: `Invalid Username or email address`,
+          message: `Check if you entered the correct information🤥`,
+          color: "red",
+          autoClose: 2000,
+          icon: <IconX />,
+        });
+      });
   };
   return (
     <>
