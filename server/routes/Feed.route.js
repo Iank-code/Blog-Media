@@ -2,7 +2,6 @@ const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
 const dotenv = require("dotenv");
-const User = require("../models/User.model");
 const UserModel = require("../models/User.model");
 dotenv.config();
 
@@ -25,7 +24,6 @@ const verifyIfUserIsPremium = async (req) => {
     const { id } = isValidToken;
 
     const user = await UserModel.findById({ _id: id });
-    console.log(user);
 
     return {
       authorized: user._id !== null,
@@ -36,6 +34,7 @@ const verifyIfUserIsPremium = async (req) => {
   }
 };
 
+// Getting posts
 router.get("/", async (req, res) => {
   try {
     const { page, limit } = req.query;
@@ -66,5 +65,24 @@ router.get("/", async (req, res) => {
     return res.status(500).json("Unable to feed");
   }
 });
+
+// Blocking post of a particular user
+// router.post("/block", async (req, res) => {
+//   try {
+//     const blockedId = req.body.authID;
+//     const uid = req.body.uid;
+//     const user = await UserModel.findById({ _id: uid });
+//     res.status(200).json(user);
+//     // const { authorized, isPremium } = await verifyIfUserIsPremium(req);
+//     // const isPremiumUser = authorized && isPremium;
+
+//     if (user.subscriptionType === "PREMIUM_USER") {
+//       // user.blockedUser.push(blockedId);
+//       return res.status(200).json(user.blockedUser);
+//     }
+//   } catch (error) {
+//     return res.status(500).json(error);
+//   }
+// });
 
 module.exports = router;
