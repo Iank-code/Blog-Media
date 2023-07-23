@@ -16,14 +16,19 @@ function Homepage() {
         headers: { Authorization: `Bearer ${accessToken}` },
       };
       axios
-        .get(`http://127.0.0.1:3000/api/feed?page=${activePage}`, config)
+        .get(
+          `https://blog-media-backend.onrender.com/api/feed?page=${activePage}`,
+          config
+        )
         .then((res) => setData(res.data))
         .catch((error) => {
           setErr(error.response.data);
         });
     }
     axios
-      .get(`http://127.0.0.1:3000/api/feed?page=${activePage}`)
+      .get(
+        `https://blog-media-backend.onrender.com/api/feed?page=${activePage}`
+      )
       .then((res) => setData(res.data))
       .catch((error) => {
         setErr(error.response.data);
