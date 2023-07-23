@@ -44,6 +44,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 500,
 
     "&:hover": {
+      color: theme.colors.blue,
       backgroundColor:
         theme.colorScheme === "dark"
           ? theme.colors.dark[6]
@@ -71,15 +72,17 @@ export default function Navbar({ links }: HeaderSimpleProps) {
   const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
 
-  const items = links.map((link) => (
-    <NavLink to={link.link}>{link.label}</NavLink>
+  const items = links.map((link, index) => (
+    <NavLink to={link.link} key={index}>
+      {link.label}
+    </NavLink>
   ));
 
   return (
     <Header height={60} mb={120}>
       <Container className={classes.header}>
         <MantineLogo size={28} />
-        <Group spacing={5} className={classes.links}>
+        <Group spacing={40} className={classes.links}>
           {items}
         </Group>
 

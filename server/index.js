@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+var cors = require("cors");
 const mongoose = require("mongoose");
 const AuthRoute = require("./routes/Auth.route");
 const FeedRoute = require("./routes/Feed.route");
 const PaymentRoute = require("./routes/Payment.route");
-const redis = require("redis");
+
+app.use(cors());
 
 dotenv.config();
 mongoose
