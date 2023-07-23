@@ -55,6 +55,7 @@ interface HeaderSimpleProps {
 }
 
 export default function Navbar({ links }: HeaderSimpleProps) {
+  const accessToken = localStorage.getItem("accessToken");
   // const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
 
@@ -70,6 +71,11 @@ export default function Navbar({ links }: HeaderSimpleProps) {
         <MantineLogo size={28} />
         <Group spacing={40} className={classes.links}>
           {items}
+          {accessToken && (
+            <button onClick={() => {localStorage.clear()
+            
+            window.location.reload()}}>Log Out</button>
+          )}
         </Group>
       </Container>
     </Header>
