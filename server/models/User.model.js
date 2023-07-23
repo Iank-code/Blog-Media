@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema(
       required: false,
       default: "FREE_USER",
     },
+    blockedUser: {
+      type: Array,
+      required: false,
+    },
   },
   { timestamps: true }
 );
