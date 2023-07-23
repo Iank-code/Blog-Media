@@ -14,9 +14,9 @@ function Homepage() {
       .then((res) => setData(res.data))
       .catch((error) => {
         setErr(error.response.data);
-        setShowErr(true);
       });
   }, [activePage]);
+
   return (
     <div>
       {err && alert(err)}
