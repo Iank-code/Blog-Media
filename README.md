@@ -1,10 +1,6 @@
 # BLOG MEDIA
 
-This is a fullstack project made by React js, Typescript and Node js. It provides all data belonging to `Hero`, `Power` and its joining table `Hero_Power`
-
-## Ruby version
-
-- Ruby 2.7.4
+This is a fullstack project made by React js, Typescript and Node js. 
 
 ## Dependencies
 
