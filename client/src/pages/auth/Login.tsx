@@ -21,10 +21,8 @@ import { notifications } from "@mantine/notifications";
 import Navbar from "../../components/Navbar";
 import { HeaderSearchProps } from "../../utils/interface/app.interface";
 import axios from "axios";
-import { useState } from "react";
 
 export default function Login() {
-  const [data, setData] = useState<string>("");
   const form = useForm<LoginInput>({
     initialValues: {
       email: "",
@@ -61,7 +59,6 @@ export default function Login() {
       },
     })
     .then((res: any) => {
-        setData(res.data);
         if (res.status === 200) {
           notifications.show({
             title: `Login Successfull`,
