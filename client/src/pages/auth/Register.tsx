@@ -25,7 +25,6 @@ import { HeaderSearchProps } from "../../utils/interface/app.interface";
 import Navbar from "../../components/Navbar";
 
 export default function Register() {
-  const [data, setData] = useState<any>();
   const headerLinks: HeaderSearchProps["links"] = [
     {
       link: "/",
@@ -77,7 +76,6 @@ export default function Register() {
         zipcode: form.values.zipcode,
         password: form.values.password,
       },
-      // data: formItem,
     })
       .then((res) => {
         console.log(res.data);
@@ -91,7 +89,6 @@ export default function Register() {
             icon: <IconCheck />,
           });
         }
-        setData(res.data);
       })
       .catch((error) => {
         console.log(error.response.data);
