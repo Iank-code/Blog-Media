@@ -19,7 +19,7 @@ import {
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import Navbar from "../../components/Navbar";
-import { HeaderSearchProps } from "../../utils/interface/navbar.interface";
+import { HeaderSearchProps } from "../../utils/interface/app.interface";
 
 export default function Login() {
   const form = useForm<LoginInput>({

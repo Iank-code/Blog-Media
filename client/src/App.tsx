@@ -1,10 +1,9 @@
 import Navbar from "./components/Navbar";
 import "./output.css";
 import Homepage from "./pages/Homepage";
-import { HeaderSearchProps } from "./utils/interface/navbar.interface";
+import { HeaderSearchProps } from "./utils/interface/app.interface";
 
 function App() {
-  
   const headerLinks: HeaderSearchProps["links"] = [
     {
       link: "/login",
@@ -19,7 +18,7 @@ function App() {
 
   return (
     <>
-      <div className="h-screen w-screen">
+      <div>
         <Navbar links={headerLinks} />
         <Homepage />
       </div>
