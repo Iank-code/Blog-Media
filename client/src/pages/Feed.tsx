@@ -14,10 +14,31 @@ function Feed() {
     },
     // Add more link groups as needed
   ];
+
+  const newHeaderLinks: HeaderSearchProps["links"] = [
+    {
+      link: "/feed",
+      label: "Feed",
+    },
+    {
+      link: "/mypost",
+      label: "My Posts",
+    },
+    {
+      link: "/following",
+      label: "Following",
+    },
+  ];
+  const accessToken = localStorage.getItem("accessToken");
+
   return (
     <>
-      <Navbar links={headerLinks} />
-      <Homepage />
+      {accessToken ? (
+        <Navbar links={newHeaderLinks} />
+      ) : (
+        <Navbar links={headerLinks} />
+      )}
+      {<Homepage />}
     </>
   );
 }
