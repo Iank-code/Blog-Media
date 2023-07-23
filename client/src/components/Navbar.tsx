@@ -1,12 +1,4 @@
-import {
-  createStyles,
-  Header,
-  Container,
-  Group,
-  Burger,
-  rem,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { createStyles, Header, Container, Group, rem } from "@mantine/core";
 import { MantineLogo } from "@mantine/ds";
 import { NavLink } from "react-router-dom";
 
@@ -20,13 +12,7 @@ const useStyles = createStyles((theme) => ({
 
   links: {
     [theme.fn.smallerThan("xs")]: {
-      display: "none",
-    },
-  },
-
-  burger: {
-    [theme.fn.largerThan("xs")]: {
-      display: "none",
+      // display: "none",
     },
   },
 
@@ -69,7 +55,7 @@ interface HeaderSimpleProps {
 }
 
 export default function Navbar({ links }: HeaderSimpleProps) {
-  const [opened, { toggle }] = useDisclosure(false);
+  // const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
 
   const items = links.map((link, index) => (
@@ -85,13 +71,6 @@ export default function Navbar({ links }: HeaderSimpleProps) {
         <Group spacing={40} className={classes.links}>
           {items}
         </Group>
-
-        <Burger
-          opened={opened}
-          onClick={toggle}
-          className={classes.burger}
-          size="sm"
-        />
       </Container>
     </Header>
   );

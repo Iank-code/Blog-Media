@@ -1,6 +1,6 @@
 import "../../output.css";
 import { IconCheck, IconX } from "@tabler/icons-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useForm, yupResolver } from "@mantine/form";
 import {
   LoginInput,
@@ -23,6 +23,7 @@ import { HeaderSearchProps } from "../../utils/interface/app.interface";
 import axios from "axios";
 
 export default function Login() {
+  const navigate = useNavigate()
   const form = useForm<LoginInput>({
     initialValues: {
       email: "",
@@ -53,13 +54,18 @@ export default function Login() {
     axios({
       method: "post",
       url: "http://localhost:3000/api/auth/login",
+      // url: `{process.env.SERVER_URL}/auth/login`,
       data: {
         email: form.values.email,
         zipcode: form.values.zipcode,
       },
     })
-    .then((res: any) => {
+      .then((res: any) => {
         if (res.status === 200) {
+          console.log(res.data)
+          localStorage.setItem("uid", res.data._id);
+          localStorage.setItem("accessToken", res.data.accessToken)
+          localStorage.setItem("username", res.data.username);
           notifications.show({
             title: `Login Successfull`,
             message: `Welcome back`,
@@ -67,6 +73,11 @@ export default function Login() {
             autoClose: 2000,
             icon: <IconCheck />,
           });
+
+          const accessToken = localStorage.getItem("accessToken");
+          if(accessToken){
+            navigate("/landing")
+          }
         }
       })
       .catch((error) => {
