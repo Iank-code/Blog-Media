@@ -62,7 +62,6 @@ export default function Login() {
     })
       .then((res: any) => {
         if (res.status === 200) {
-          console.log(res.data);
           localStorage.setItem("uid", res.data._id);
           localStorage.setItem("accessToken", res.data.accessToken);
           localStorage.setItem("username", res.data.username);

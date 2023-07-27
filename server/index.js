@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const AuthRoute = require("./routes/Auth.route");
 const FeedRoute = require("./routes/Feed.route");
 const PaymentRoute = require("./routes/Payment.route");
+const UserInfoRoute = require("./routes/User.route");
 
 app.use(cors());
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/api/auth", AuthRoute);
 app.use("/api/feed", FeedRoute);
 app.use("/api/payment", PaymentRoute);
+app.use("/api/user", UserInfoRoute);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("listening on 3000");
