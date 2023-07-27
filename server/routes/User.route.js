@@ -23,7 +23,9 @@ router.get("/info", async (req, res) => {
 
     const user = await UserModel.findById({ _id: id });
 
-    return res.status(200).json(user);
+    const { password, ...others } = user.toObject();
+
+    return res.status(200).json(others);
   } catch (error) {
     return res.status(500).json(error);
   }
