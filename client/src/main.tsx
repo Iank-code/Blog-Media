@@ -45,10 +45,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           {/* <Route path="/landing" element={<LandingPage />} /> */}
           <Route path="/mypost" element={<MyPost />} />
           <Route
-            path="/mypost"
+            path="/mypost/:id"
             element={
               <ProtectedRoute
-                to="/mypost"
+                to="/mypost/:id"
                 outlet={
                   <Suspense
                     fallback={<div className="loading">Loading...</div>}

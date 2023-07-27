@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { HeaderSearchProps } from "../utils/interface/app.interface";
 
 function Feed() {
+  const accessToken = localStorage.getItem("accessToken");
   const headerLinks: HeaderSearchProps["links"] = [
     {
       link: "/login",
@@ -21,7 +22,7 @@ function Feed() {
       label: "Feed",
     },
     {
-      link: "/mypost",
+      link: `/mypost/${accessToken}`,
       label: "My Posts",
     },
     {
@@ -29,7 +30,6 @@ function Feed() {
       label: "Following",
     },
   ];
-  const accessToken = localStorage.getItem("accessToken");
 
   return (
     <>
