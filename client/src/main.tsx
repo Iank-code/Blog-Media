@@ -48,7 +48,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             path="/mypost/:id"
             element={
               <ProtectedRoute
-                to="/mypost"
+                to="/mypost/:id"
                 outlet={
                   <Suspense
                     fallback={<div className="loading">Loading...</div>}
